@@ -7,6 +7,7 @@ MIDI_CREATE_DEFAULT_INSTANCE();
 // the setup function runs once when you press reset or power the board
 void setup() {
   Serial.begin(19200);
+  Debug.setDebugLevel(DBG_VERBOSE);
   Debug.print(DBG_WARNING, "starting the CC filter");
   delay(500);
   MIDI.begin(MIDI_CHANNEL_OMNI);  // Listen to all incoming messages
@@ -16,7 +17,10 @@ void setup() {
 }
 
 void ccFunc(byte channel, byte number, byte value) {
-  Debug.setDebugLevel(DBG_VERBOSE);
+  // re-map the value from 127 to 0 for HB MP100 -> Headrush GB
+  if (value==127) {
+    value = 0;
+  }
   MIDI.sendControlChange(number, value, channel);
   blinkShortly();
   //  blinkNumberInReverseOrder(channel);
@@ -30,6 +34,7 @@ void blinkShortly() {
   digitalWrite(LED_BUILTIN, LOW);
 }
 
+// use when debugging
 void blinkNumberInReverseOrder(byte number) {
   while (number > 0) {
     byte lastDigit = number % 10;
