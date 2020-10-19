@@ -21,7 +21,7 @@
 - open [this project](sketch_oct19a_midi.ino)
 - add a zip dependency: [FortySevenEffects/arduino_midi_library](https://github.com/FortySevenEffects/arduino_midi_library), i.e. from the [latest release source zip](https://github.com/FortySevenEffects/arduino_midi_library/releases/latest)
 - add the IDE-bundled [Arduino_DebugUtils](https://github.com/arduino-libraries/Arduino_DebugUtils) library
-- make sure the shield is connected correctly to the board & switch it off (otherwise, upload will fail)
+- make sure the shield is connected correctly to the board & switched off (otherwise, the upload will fail)
 
 ![](doc/img/uploading.jpg)
 
