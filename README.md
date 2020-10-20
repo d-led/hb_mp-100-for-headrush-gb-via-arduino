@@ -33,7 +33,7 @@ Use case:
 
 - GB is positioned at the waist level to enable touch screen without bending down
 - MP is positioned on the floor
-- the setup enables footswitch-controlled looping, while also allowing scrolling through rigs as well through the footswitch
+- the setup enables MP-100 footswitch-controlled looping, while also allowing for scrolling through the rigs as well through the footswitch
 
 MP `CUS1` set up:
 
