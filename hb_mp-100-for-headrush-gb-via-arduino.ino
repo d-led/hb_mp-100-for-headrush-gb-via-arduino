@@ -5,7 +5,7 @@
 MIDI_CREATE_DEFAULT_INSTANCE();
 
 // uncomment this for debugging via the LED
-//#define DEBUG 1
+//#define MYDEBUG 1
 
 // the setup function runs once when you press reset or power the board
 void setup() {
@@ -14,6 +14,7 @@ void setup() {
   Debug.print(DBG_WARNING, "starting the CC filter");
   delay(500);
   MIDI.begin(MIDI_CHANNEL_OMNI);  // Listen to all incoming messages
+  MIDI.turnThruOff();
   MIDI.setHandleControlChange(ccFunc);
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(LED_BUILTIN, OUTPUT);
@@ -22,11 +23,16 @@ void setup() {
 void ccFunc(byte channel, byte number, byte value) {
   // re-map the value from 127 to 0 for HB MP100 -> Headrush GB
   if (value == 127) {
-    value = 0;
+    // down
+    MIDI.sendControlChange(number, 127, channel);
+    // up
+    MIDI.sendControlChange(number, 0, channel);
+  } else {
+    // pass through
+    MIDI.sendControlChange(number, value, channel);
   }
-  MIDI.sendControlChange(number, value, channel);
-
-#ifdef DEBUG
+  
+#ifdef MYDEBUG
   blinkNumberInReverseOrder(channel);
   blinkNumberInReverseOrder(number);
   blinkNumberInReverseOrder(value);
