@@ -12,7 +12,7 @@ void setup() {
   Serial.begin(19200);
   Debug.setDebugLevel(DBG_VERBOSE);
   Debug.print(DBG_WARNING, "starting the CC filter");
-  delay(500);
+  blinkShortly();
   MIDI.begin(MIDI_CHANNEL_OMNI);  // Listen to all incoming messages
   MIDI.turnThruOff();
   MIDI.setHandleControlChange(ccFunc);
@@ -43,7 +43,7 @@ void ccFunc(byte channel, byte number, byte value) {
 
 void blinkShortly() {
   digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(300);                       // wait for a second
+  delay(100);                       // wait for a second
   digitalWrite(LED_BUILTIN, LOW);
 }
 
